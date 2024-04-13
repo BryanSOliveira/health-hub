@@ -1,0 +1,100 @@
+<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-heart-pulse" viewBox="0 0 16 16">
+	    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857q.09.083.176.171a3 3 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01zM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5"/>
+	    <path d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162z"/>
+	  </svg>
+	  <i>Health Hub</i>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      	<li class="nav-item">
+          <a class="nav-link" href="#">
+          	<i class="bi bi-people"></i>
+            Employees
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+          	<i class="bi bi-clipboard2"></i>
+          	Exam
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container mt-5">
+
+
+	<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+	  <li class="nav-item" role="presentation">
+	    <button class="nav-link active" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-login" type="button" role="tab" aria-controls="pills-login" aria-selected="true">Login</button>
+	  </li>
+	  <li class="nav-item" role="presentation">
+	    <button class="nav-link" id="pills-register-tab" data-bs-toggle="pill" data-bs-target="#pills-register" type="button" role="tab" aria-controls="pills-register" aria-selected="false">Register</button>
+	  </li>
+	</ul>
+	<div class="tab-content" id="pills-tabContent">
+	  <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab" tabindex="0">
+	  	<div class="card">
+		    <div class="card-body">
+		      <h5 class="card-title">Required Authentication</h5>
+		      <form>
+					  <div class="mb-3">
+					    <label for="loginInputUserName" class="form-label">
+					    	<i class="bi bi-person"></i>
+					    	Username
+					   	</label>
+					    <input type="text" class="form-control" id="loginInputUserName" aria-describedby="loginUserNameHelp" maxlength="50">
+					    <div id="loginUserNameHelp" class="form-text">We'll never share your email with anyone else.</div>
+					  </div>
+					  <div class="mb-3">
+					    <label for="loginInputPassword" class="form-label">
+					    	<i class="bi bi-key"></i>
+					    	Password
+					    </label>
+					    <input type="password" class="form-control" id="loginInputPassword" maxlength="50">
+					  </div>
+					  <button type="submit" class="btn btn-success">
+						  <i class="bi bi-box-arrow-in-right"></i>
+						  Login 
+					  </button>
+					</form>
+		    </div>
+		  </div>
+	  </div>
+	  <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="pills-register-tab" tabindex="0">
+	  	<div class="card">
+		    <div class="card-body">
+		      <h5 class="card-title">Create an account</h5>
+		      <form>
+					  <div class="mb-3">
+					    <label for="registerInputUserName" class="form-label">
+					    	<i class="bi bi-person"></i>
+					    	Username
+					   	</label>
+					    <input type="text" class="form-control" id="registerInputUserName" aria-describedby="registerUserNameHelp" maxlength="50">
+					    <div id="registerUserNameHelp" class="form-text">We'll never share your email with anyone else.</div>
+					  </div>
+					  <div class="mb-3">
+					    <label for="registerInputPassword" class="form-label">
+					    	<i class="bi bi-key"></i>
+					    	Password
+					    </label>
+					    <input type="password" class="form-control" id="registerInputPassword" maxlength="50">
+					  </div>
+					  <button type="submit" class="btn btn-success">
+						  <i class="bi bi-box-arrow-in-right"></i>
+						  Register 
+					  </button>
+					</form>
+		    </div>
+		  </div>
+	  </div>
+	</div>
+</div>

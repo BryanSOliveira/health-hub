@@ -9,8 +9,8 @@
 		<action name="hello" class="br.com.bryan.HelloAction">
             <result>/hello.jsp</result>
         </action>
-        <action name="index">
-            <result>/index.jsp</result>
+        <action name="">
+            <result>/WEB-INF/jsp/login/login.jsp</result>
         </action>
 	</package>
 </struts>
