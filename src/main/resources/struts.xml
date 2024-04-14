@@ -5,10 +5,8 @@
 
 <struts>
 	<constant name="struts.devMode" value="true" />
+	<constant name="struts.action.excludePattern" value="/soap.*" />
 	<package name="health-hub" extends="struts-default">
-		<action name="hello" class="br.com.bryan.HelloAction">
-            <result>/hello.jsp</result>
-        </action>
         <action name="">
             <result>/WEB-INF/jsp/login/login.jsp</result>
         </action>
