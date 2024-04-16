@@ -6,9 +6,24 @@
 <struts>
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.action.excludePattern" value="/soap.*" />
+	<constant name="struts.ui.theme" value="simple" />
+	
 	<package name="health-hub" extends="struts-default">
         <action name="">
-            <result>/WEB-INF/jsp/login/login.jsp</result>
+            <result>/WEB-INF/jsp/index.jsp</result>
         </action>
+        <action name="register" class="br.com.bryan.actions.RegisterAction">
+        	<result name="success">/WEB-INF/jsp/index.jsp</result>
+            <result name="input">/WEB-INF/jsp/index.jsp</result>
+            <result name="error">/WEB-INF/jsp/index.jsp</result>
+        </action>
+        <action name="loginAction" class="br.com.bryan.actions.LoginAction">
+	        <result name="success">/WEB-INF/jsp/index.jsp</result>
+	        <result name="input">/WEB-INF/jsp/index.jsp</result>
+	        <result name="error">/WEB-INF/jsp/index.jsp</result>
+	    </action>
+	    <action name="logout" class="br.com.bryan.actions.LogoutAction">
+	        <result name="success">/WEB-INF/jsp/index.jsp</result>
+	    </action>
 	</package>
 </struts>

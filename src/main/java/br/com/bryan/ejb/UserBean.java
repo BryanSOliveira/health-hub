@@ -15,4 +15,12 @@ public class UserBean {
 	public User findById(Long id) {
 		return userDAOImpl.findById(id);
 	}
+	
+	public User findByUsername(String username) {
+		return userDAOImpl.findByUsername(username);
+	}
+	
+	public void save(User user) {
+		userDAOImpl.save(user);
+	}
 }

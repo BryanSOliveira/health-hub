@@ -99,4 +99,21 @@ public class UserDAOImpl implements UserDAO {
 		user.setInactiveTime(resultSet.getInt("qt_tempo_inatividade"));
 		return user;
 	}
+
+	@Override
+	public User findByUsername(String username) {
+		String sql = "SELECT * FROM usuario WHERE nm_login = ?";
+		try (Connection connection = DataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql)) {
+			statement.setString(1, username);
+			try (ResultSet resultSet = statement.executeQuery()) {
+				if (resultSet.next()) {
+					return mapResultSetToUser(resultSet);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
