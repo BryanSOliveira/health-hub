@@ -31,7 +31,7 @@
       <s:if test="#session.LOGGED_IN_USER != null">
 	      <div class="dropdown">
 				  <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Welcome, <s:property value="#session.LOGGED_IN_USER"/>!
+						Hello, <s:property value="#session.LOGGED_IN_USER"/>!
 				  </button>
 				  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 				    <li>
