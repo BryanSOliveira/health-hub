@@ -25,5 +25,8 @@
 	    <action name="logout" class="br.com.bryan.actions.LogoutAction">
 	        <result name="success">/WEB-INF/jsp/index.jsp</result>
 	    </action>
+	    <action name="exam">
+	        <result>/WEB-INF/jsp/exam.jsp</result>
+	    </action>
 	</package>
 </struts>

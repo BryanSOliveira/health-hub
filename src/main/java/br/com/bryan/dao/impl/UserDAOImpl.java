@@ -86,7 +86,7 @@ public class UserDAOImpl implements UserDAO {
 				users.add(user);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace(); // Ou lidar com a exceção de outra forma
+			e.printStackTrace();
 		}
 		return users;
 	}
