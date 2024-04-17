@@ -26,7 +26,13 @@
 	        <result name="success">/WEB-INF/jsp/index.jsp</result>
 	    </action>
 	    <action name="exam">
-	        <result>/WEB-INF/jsp/exam.jsp</result>
+	        <result>/WEB-INF/jsp/exam/exam.jsp</result>
+	    </action>
+	    <action name="editExam">
+	        <result>/WEB-INF/jsp/exam/editExam.jsp</result>
+	    </action>
+	    <action name="newExam">
+	        <result>/WEB-INF/jsp/exam/newExam.jsp</result>
 	    </action>
 	</package>
 </struts>

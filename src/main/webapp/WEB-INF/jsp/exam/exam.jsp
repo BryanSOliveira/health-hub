@@ -52,9 +52,9 @@
 						  </button>
 						</div>
 						<div class="ms-2">
-							<button class="btn btn-primary">
+							<a href="newExam" class="btn btn-primary">
 								ADD NEW
-							</button>
+							</a>
 						</div>
 						<div class="ms-auto">
 							<button class="btn btn-secondary">
@@ -78,7 +78,7 @@
 						  <tbody>
 						    <tr>
 						      <th>
-						      	<a href="exam/1">
+						      	<a href="<s:url action='editExam'><s:param name='id' value='1'/></s:url>">
 						      		1
 						      	</a>
 						      </th>
