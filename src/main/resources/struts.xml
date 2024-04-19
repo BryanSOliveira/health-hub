@@ -9,6 +9,16 @@
 	<constant name="struts.ui.theme" value="simple" />
 	
 	<package name="health-hub" extends="struts-default">
+		<interceptors>
+	        <interceptor name="store" class="org.apache.struts2.interceptor.MessageStoreInterceptor"/>
+		    <interceptor-stack name="appDefaultStack">
+		        <interceptor-ref name="defaultStack"/>
+		        <interceptor-ref name="store">
+		            <param name="operationMode">AUTOMATIC</param>
+		        </interceptor-ref>
+		    </interceptor-stack>
+	    </interceptors>
+	    
         <action name="">
             <result>/WEB-INF/jsp/index.jsp</result>
         </action>
@@ -25,14 +35,47 @@
 	    <action name="logout" class="br.com.bryan.actions.LogoutAction">
 	        <result name="success">/WEB-INF/jsp/index.jsp</result>
 	    </action>
-	    <action name="exam">
-	        <result>/WEB-INF/jsp/exam/exam.jsp</result>
+	    <action name="exams" class="br.com.bryan.actions.exam.ListExamAction">
+	        <result>/WEB-INF/jsp/exam/listExam.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
 	    </action>
-	    <action name="editExam">
-	        <result>/WEB-INF/jsp/exam/editExam.jsp</result>
+	    <action name="editExam" class="br.com.bryan.actions.exam.EditExamAction">
+	    	<interceptor-ref name="appDefaultStack"/>
+	    	<result name="input">/WEB-INF/jsp/exam/editExam.jsp</result>
+	        <result name="success">/WEB-INF/jsp/exam/editExam.jsp</result>
+	        <result name="error">/WEB-INF/jsp/exam/editExam.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
 	    </action>
 	    <action name="newExam">
 	        <result>/WEB-INF/jsp/exam/newExam.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
 	    </action>
+	    <action name="createExam" class="br.com.bryan.actions.exam.CreateExamAction">
+		    <result name="success" type="redirectAction">
+		        <param name="actionName">editExam</param>
+		        <param name="id">${exam.id}</param>
+		    </result>
+		    <result name="login">/WEB-INF/jsp/index.jsp</result>
+		    <result name="input">/WEB-INF/jsp/exam/newExam.jsp</result>
+		</action>
+		<action name="updateExam" class="br.com.bryan.actions.exam.UpdateExamAction">
+			<interceptor-ref name="appDefaultStack"/>
+			<result name="success" type="redirectAction">
+				<param name="actionName">editExam</param>
+		        <param name="id">${exam.id}</param>
+			</result>
+			<result name="error" type="redirectAction">exams</result>
+		    <result name="login">/WEB-INF/jsp/index.jsp</result>
+		    <result name="input" type="dispatcher">/WEB-INF/jsp/exam/editExam.jsp</result>
+		</action>
+		<action name="deleteExam" class="br.com.bryan.actions.exam.DeleteExamAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">exams</param>
+		        <param name="criteria.currentPage">${criteria.currentPage}</param>
+		        <param name="criteria.pageSize">${criteria.pageSize}</param>
+		        <param name="criteria.activeFilter">${criteria.activeFilter}</param>
+		        <param name="criteria.searchQuery">${criteria.searchQuery}</param>
+		    </result>
+		</action>
 	</package>
 </struts>

@@ -17,9 +17,14 @@ public class LogoutAction extends ActionSupport implements SessionAware {
 	}
 
     public String execute() {
-    	if (sessionMap != null) {
-            sessionMap.clear();
-        }
-        return SUCCESS;
+    	try {
+	    	if (sessionMap != null) {
+	            sessionMap.clear();
+	        }
+	        return SUCCESS;
+    	} catch (Exception e) {
+			addActionError("An error occurred: " + e.getMessage());
+			return ERROR;
+		}
     }
 }

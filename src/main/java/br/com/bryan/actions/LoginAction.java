@@ -1,6 +1,5 @@
 package br.com.bryan.actions;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 import javax.naming.InitialContext;
@@ -51,14 +50,19 @@ public class LoginAction extends ActionSupport implements SessionAware {
         }
     }
 
-    public String execute() throws NoSuchAlgorithmException {
-        if (userFacade.authenticate(loginInfo.getUsername(), loginInfo.getPassword())) {
-        	sessionMap.put("LOGGED_IN_USER", loginInfo.getUsername());
-            return SUCCESS;
-        } else {
-            addActionError("Invalid username or password.");
-            return ERROR;
-        }
+    public String execute() {
+    	try {
+	        if (userFacade.authenticate(loginInfo.getUsername(), loginInfo.getPassword())) {
+	        	sessionMap.put("LOGGED_IN_USER", loginInfo.getUsername());
+	            return SUCCESS;
+	        } else {
+	            addActionError("Invalid username or password.");
+	            return ERROR;
+	        }
+    	} catch (Exception e) {
+			addActionError("An error occurred: " + e.getMessage());
+			return ERROR;
+		}
     }
 
 	@Override

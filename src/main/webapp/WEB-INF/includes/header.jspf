@@ -21,9 +21,9 @@
 	          </a>
 	        </li>
 	        <li class="nav-item">
-	          <a class="nav-link" href="exam">
+	          <a class="nav-link" href="exams">
 	          	<i class="bi bi-clipboard2"></i>
-	          	Exam
+	          	Exams
 	          </a>
 	        </li>
         </s:if>
@@ -31,11 +31,11 @@
       <s:if test="#session.LOGGED_IN_USER != null">
 	      <div class="dropdown">
 				  <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Hi, <s:property value="#session.LOGGED_IN_USER"/>!
+						Hi, <s:property value="#session.LOGGED_IN_USER"/>! <i class="bi bi-person-raised-hand"></i>
 				  </button>
 				  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
 				    <li>
-				    	<s:form action="logout" class="form-inline">
+				    	<s:form action="logout">
 					    	<button type="submit" class="btn btn-link dropdown-item">
 					    		<i class="bi bi-door-closed"></i>
 					    		Logout
@@ -130,3 +130,20 @@
 	  </div>
 	</div>
 </s:if>
+<s:else>
+	<div class="container">
+		<!-- Messages -->
+		<div class="mt-2">
+			<s:if test="hasActionMessages()">
+				<div class="alert alert-info" role="alert">
+				  <s:actionmessage />
+				</div>
+			</s:if>
+			<s:if test="hasActionErrors()">
+				<div class="alert alert-danger" role="alert">
+					<s:actionerror /> 
+				</div>
+			</s:if>
+	  </div>
+	</div>
+</s:else>
