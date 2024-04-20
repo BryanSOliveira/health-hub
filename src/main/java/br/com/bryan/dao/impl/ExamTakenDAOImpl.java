@@ -133,7 +133,7 @@ public class ExamTakenDAOImpl implements ExamTakenDAO {
 	        sql.append(" WHERE ");
 	        sql.append(String.join(" AND ", conditions));
 	    }
-	    sql.append(" ORDER BY er.cd_exame_realizado DESC LIMIT ? OFFSET ?");
+	    sql.append(" ORDER BY er.dt_realizacao DESC, f.nm_funcionario LIMIT ? OFFSET ?");
 		
 		try (Connection connection = DataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(sql.toString())) {

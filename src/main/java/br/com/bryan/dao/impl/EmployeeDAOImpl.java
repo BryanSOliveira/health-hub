@@ -116,7 +116,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	        sql.append(" WHERE ");
 	        sql.append(String.join(" AND ", conditions));
 	    }
-	    sql.append(" ORDER BY cd_funcionario DESC LIMIT ? OFFSET ?");
+	    sql.append(" ORDER BY nm_funcionario LIMIT ? OFFSET ?");
 		
 		try (Connection connection = DataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(sql.toString())) {

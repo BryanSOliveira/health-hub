@@ -138,7 +138,7 @@ public class ExamDAOImpl implements ExamDAO {
 	        sql.append(" WHERE ");
 	        sql.append(String.join(" AND ", conditions));
 	    }
-	    sql.append(" ORDER BY cd_exame DESC LIMIT ? OFFSET ?");
+	    sql.append(" ORDER BY nm_exame LIMIT ? OFFSET ?");
 		
 		try (Connection connection = DataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(sql.toString())) {
