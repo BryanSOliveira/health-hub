@@ -12,7 +12,11 @@ public class SearchCriteria {
         this.pageSize = 25;
     }
 
-    public String getActiveFilter() {
+    public SearchCriteria(String activeFilter) {
+		this.activeFilter = activeFilter;
+	}
+
+	public String getActiveFilter() {
         return activeFilter;
     }
 

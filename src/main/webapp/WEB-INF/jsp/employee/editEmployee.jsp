@@ -20,7 +20,7 @@
 							<i class="bi bi-arrow-90deg-left"> Back</i>
 						</a>
 						<i class="bi bi-clipboard2"></i>
-						Employees 
+						Employee
 						<s:if test="employee != null && employee.id != null">
 							<span class="badge bg-light text-dark">
 								<s:property value="employee.id" />

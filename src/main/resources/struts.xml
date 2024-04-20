@@ -125,5 +125,49 @@
 		    </result>
 		    <result name="login">/WEB-INF/jsp/index.jsp</result>
 		</action>
+		
+		<!-- ExamTaken -->
+		<action name="examsTaken" class="br.com.bryan.actions.examTaken.ListExamsTakenAction">
+	        <result>/WEB-INF/jsp/examTaken/listExamsTaken.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
+	    </action>
+	    <action name="newExamTaken" class="br.com.bryan.actions.examTaken.LoadFormDataAction">
+	        <result>/WEB-INF/jsp/examTaken/newExamTaken.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
+	    </action>
+	    <action name="editExamTaken" class="br.com.bryan.actions.examTaken.EditExamTakenAction">
+	    	<interceptor-ref name="appDefaultStack"/>
+	    	<result name="input">/WEB-INF/jsp/examTaken/editExamTaken.jsp</result>
+	        <result name="success">/WEB-INF/jsp/examTaken/editExamTaken.jsp</result>
+	        <result name="error">/WEB-INF/jsp/examTaken/editExamTaken.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
+	    </action>
+	    <action name="updateExamTaken" class="br.com.bryan.actions.examTaken.UpdateExamTakenAction">
+			<interceptor-ref name="appDefaultStack"/>
+			<result name="success" type="redirectAction">
+				<param name="actionName">editExamTaken</param>
+		        <param name="id">${examTaken.id}</param>
+			</result>
+			<result name="error" type="redirectAction">examsTaken</result>
+		    <result name="login">/WEB-INF/jsp/index.jsp</result>
+		    <result name="input" type="dispatcher">/WEB-INF/jsp/examTaken/editExamTaken.jsp</result>
+		</action>
+	    <action name="createExamTaken" class="br.com.bryan.actions.examTaken.CreateExamTakenAction">
+		    <result name="success" type="redirectAction">
+		        <param name="actionName">editExamTaken</param>
+		        <param name="id">${examTaken.id}</param>
+		    </result>
+		    <result name="login">/WEB-INF/jsp/index.jsp</result>
+		    <result name="input">/WEB-INF/jsp/examTaken/newExamTaken.jsp</result>
+		</action>
+		<action name="deleteExamTaken" class="br.com.bryan.actions.examTaken.DeleteExamTakenAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">examsTaken</param>
+		        <param name="criteria.currentPage">${criteria.currentPage}</param>
+		        <param name="criteria.pageSize">${criteria.pageSize}</param>
+		        <param name="criteria.searchQuery">${criteria.searchQuery}</param>
+		    </result>
+		    <result name="login">/WEB-INF/jsp/index.jsp</result>
+		</action>
 	</package>
 </struts>

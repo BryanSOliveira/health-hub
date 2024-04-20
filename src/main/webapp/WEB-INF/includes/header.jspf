@@ -26,6 +26,12 @@
 	          	Exams
 	          </a>
 	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="examsTaken">
+	          	<i class="bi bi-clipboard-check"></i>
+	          	Exams Taken
+	          </a>
+	        </li>
         </s:if>
       </ul>
       <s:if test="#session.LOGGED_IN_USER != null">
@@ -33,7 +39,7 @@
 				  <button class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Hi, <s:property value="#session.LOGGED_IN_USER"/>! <i class="bi bi-person-raised-hand"></i>
 				  </button>
-				  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+				  <ul class="dropdown-menu dropdown-menu-sm-end">
 				    <li>
 				    	<s:form action="logout">
 					    	<button type="submit" class="btn btn-link dropdown-item">
