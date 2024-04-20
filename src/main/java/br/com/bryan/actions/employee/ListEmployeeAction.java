@@ -1,5 +1,6 @@
-package br.com.bryan.actions.exam;
+package br.com.bryan.actions.employee;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.naming.InitialContext;
@@ -8,34 +9,35 @@ import org.apache.struts2.action.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import br.com.bryan.facade.ExamFacade;
+import br.com.bryan.facade.EmployeeFacade;
+import br.com.bryan.model.Employee;
 import br.com.bryan.model.criteria.SearchCriteria;
 
-public class DeleteExamAction extends ActionSupport implements SessionAware {
-	
-	private static final long serialVersionUID = 1L;
+public class ListEmployeeAction extends ActionSupport implements SessionAware {
 
-	private ExamFacade examFacade;
-	private Long id;
+	private static final long serialVersionUID = 1L;
+	
+	private EmployeeFacade employeeFacade;
+	private List<Employee> employees;
 	private Map<String, Object> sessionMap;
 	
-	SearchCriteria criteria = new SearchCriteria();
+	private SearchCriteria criteria = new SearchCriteria();
 	
-	public DeleteExamAction() {
+	public ListEmployeeAction() {
 		try {
 			InitialContext ic = new InitialContext();
-			examFacade = (ExamFacade) ic.lookup("java:app/health-hub/ExamFacadeImpl");
+			employeeFacade = (EmployeeFacade) ic.lookup("java:app/health-hub/EmployeeFacadeImpl");
 		} catch (Exception e) {
-			throw new RuntimeException("Failed to look up ExamFacade", e);
+			throw new RuntimeException("Failed to look up employeeFacade", e);
 		}
 	}
 
-	public Long getId() {
-		return id;
+	public List<Employee> getEmployees() {
+		return employees;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
 	}
 
 	public SearchCriteria getCriteria() {
@@ -48,19 +50,14 @@ public class DeleteExamAction extends ActionSupport implements SessionAware {
 
 	@Override
 	public void withSession(Map<String, Object> session) {
-		this.sessionMap = session;
+		sessionMap = session;
 	}
-
+	
 	public String execute() {
 		try {
 			Boolean isLoggedIn = sessionMap.get("LOGGED_IN_USER") != null;
 			if(isLoggedIn) {
-				if(id == null) {
-					addActionError("ID is required.");
-					return ERROR;
-				}
-				
-				examFacade.delete(id);
+				employees = employeeFacade.findAll(criteria);
 				return SUCCESS;
 			} else {
 				return "login";

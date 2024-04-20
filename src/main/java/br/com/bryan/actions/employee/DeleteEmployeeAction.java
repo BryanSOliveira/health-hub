@@ -1,4 +1,4 @@
-package br.com.bryan.actions.exam;
+package br.com.bryan.actions.employee;
 
 import java.util.Map;
 
@@ -8,25 +8,25 @@ import org.apache.struts2.action.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import br.com.bryan.facade.ExamFacade;
+import br.com.bryan.facade.EmployeeFacade;
 import br.com.bryan.model.criteria.SearchCriteria;
 
-public class DeleteExamAction extends ActionSupport implements SessionAware {
-	
-	private static final long serialVersionUID = 1L;
+public class DeleteEmployeeAction extends ActionSupport implements SessionAware {
 
-	private ExamFacade examFacade;
+	private static final long serialVersionUID = 1L;
+	
+	private EmployeeFacade employeeFacade;
 	private Long id;
 	private Map<String, Object> sessionMap;
 	
 	SearchCriteria criteria = new SearchCriteria();
 	
-	public DeleteExamAction() {
+	public DeleteEmployeeAction() {
 		try {
 			InitialContext ic = new InitialContext();
-			examFacade = (ExamFacade) ic.lookup("java:app/health-hub/ExamFacadeImpl");
+			employeeFacade = (EmployeeFacade) ic.lookup("java:app/health-hub/EmployeeFacadeImpl");
 		} catch (Exception e) {
-			throw new RuntimeException("Failed to look up ExamFacade", e);
+			throw new RuntimeException("Failed to look up employeeFacade", e);
 		}
 	}
 
@@ -48,9 +48,9 @@ public class DeleteExamAction extends ActionSupport implements SessionAware {
 
 	@Override
 	public void withSession(Map<String, Object> session) {
-		this.sessionMap = session;
+		sessionMap = session;
 	}
-
+	
 	public String execute() {
 		try {
 			Boolean isLoggedIn = sessionMap.get("LOGGED_IN_USER") != null;
@@ -60,7 +60,7 @@ public class DeleteExamAction extends ActionSupport implements SessionAware {
 					return ERROR;
 				}
 				
-				examFacade.delete(id);
+				employeeFacade.delete(id);
 				return SUCCESS;
 			} else {
 				return "login";

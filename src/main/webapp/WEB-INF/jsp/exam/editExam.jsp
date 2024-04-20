@@ -27,11 +27,11 @@
 							</span>
 							<s:form action="deleteExam" class="d-inline">
 								<s:hidden name="id" value="%{exam.id}"/>
-					    	<button type="submit" class="btn btn-danger float-none float-sm-end" 
-					    					onclick="return confirm('Are you sure you want to delete this exam?');">
-					    		<i class="bi bi-trash3"></i>
-					    	</button>
-				    	</s:form>
+						    	<button type="submit" class="btn btn-danger float-none float-sm-end" 
+						    					onclick="return confirm('Are you sure you want to delete this exam?');">
+						    		<i class="bi bi-trash3"></i>
+						    	</button>
+				    		</s:form>
 						</s:if>
 					</h2>
 				</div>

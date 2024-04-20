@@ -16,12 +16,12 @@
 			<div class="card">
 				<div class="card-header" style="background-color: #26e2f8;">
 					<h2 class="card-title">				
-						<i class="bi bi-clipboard2"></i>
-						Exam 
-						<span class="badge bg-light text-dark">NEW</span>
 						<a class="btn btn-secondary" href="exams">
 							<i class="bi bi-arrow-90deg-left"> Back</i>
 						</a>
+						<i class="bi bi-clipboard2"></i>
+						Exam 
+						<span class="badge bg-light text-dark">NEW</span>
 					</h2>
 				</div>
 				<div class="card-body">

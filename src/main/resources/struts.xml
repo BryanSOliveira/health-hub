@@ -22,6 +22,7 @@
         <action name="">
             <result>/WEB-INF/jsp/index.jsp</result>
         </action>
+        
         <action name="register" class="br.com.bryan.actions.RegisterAction">
         	<result name="success">/WEB-INF/jsp/index.jsp</result>
             <result name="input">/WEB-INF/jsp/index.jsp</result>
@@ -35,6 +36,8 @@
 	    <action name="logout" class="br.com.bryan.actions.LogoutAction">
 	        <result name="success">/WEB-INF/jsp/index.jsp</result>
 	    </action>
+	    
+	    <!--  Exam -->
 	    <action name="exams" class="br.com.bryan.actions.exam.ListExamAction">
 	        <result>/WEB-INF/jsp/exam/listExam.jsp</result>
 	        <result name="login">/WEB-INF/jsp/index.jsp</result>
@@ -76,6 +79,51 @@
 		        <param name="criteria.activeFilter">${criteria.activeFilter}</param>
 		        <param name="criteria.searchQuery">${criteria.searchQuery}</param>
 		    </result>
+		    <result name="login">/WEB-INF/jsp/index.jsp</result>
+		</action>
+		
+		<!-- Employee -->
+		<action name="employees" class="br.com.bryan.actions.employee.ListEmployeeAction">
+	        <result>/WEB-INF/jsp/employee/listEmployee.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
+	    </action>
+	    <action name="editEmployee" class="br.com.bryan.actions.employee.EditEmployeeAction">
+	    	<interceptor-ref name="appDefaultStack"/>
+	    	<result name="input">/WEB-INF/jsp/employee/editEmployee.jsp</result>
+	        <result name="success">/WEB-INF/jsp/employee/editEmployee.jsp</result>
+	        <result name="error">/WEB-INF/jsp/employee/editEmployee.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
+	    </action>
+	    <action name="updateEmployee" class="br.com.bryan.actions.employee.UpdateEmployeeAction">
+			<interceptor-ref name="appDefaultStack"/>
+			<result name="success" type="redirectAction">
+				<param name="actionName">editEmployee</param>
+		        <param name="id">${employee.id}</param>
+			</result>
+			<result name="error" type="redirectAction">employees</result>
+		    <result name="login">/WEB-INF/jsp/index.jsp</result>
+		    <result name="input" type="dispatcher">/WEB-INF/jsp/employee/editEmployee.jsp</result>
+		</action>
+		<action name="newEmployee">
+	        <result>/WEB-INF/jsp/employee/newEmployee.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
+	    </action>
+	    <action name="createEmployee" class="br.com.bryan.actions.employee.CreateEmployeeAction">
+		    <result name="success" type="redirectAction">
+		        <param name="actionName">editEmployee</param>
+		        <param name="id">${employee.id}</param>
+		    </result>
+		    <result name="login">/WEB-INF/jsp/index.jsp</result>
+		    <result name="input">/WEB-INF/jsp/employee/newEmployee.jsp</result>
+		</action>
+		<action name="deleteEmployee" class="br.com.bryan.actions.employee.DeleteEmployeeAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">employees</param>
+		        <param name="criteria.currentPage">${criteria.currentPage}</param>
+		        <param name="criteria.pageSize">${criteria.pageSize}</param>
+		        <param name="criteria.searchQuery">${criteria.searchQuery}</param>
+		    </result>
+		    <result name="login">/WEB-INF/jsp/index.jsp</result>
 		</action>
 	</package>
 </struts>

@@ -1,4 +1,4 @@
-package br.com.bryan.actions.exam;
+package br.com.bryan.actions.employee;
 
 import java.util.Map;
 
@@ -8,25 +8,24 @@ import org.apache.struts2.action.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import br.com.bryan.facade.ExamFacade;
-import br.com.bryan.model.criteria.SearchCriteria;
+import br.com.bryan.facade.EmployeeFacade;
+import br.com.bryan.model.Employee;
 
-public class DeleteExamAction extends ActionSupport implements SessionAware {
-	
+public class EditEmployeeAction extends ActionSupport implements SessionAware {
+
 	private static final long serialVersionUID = 1L;
-
-	private ExamFacade examFacade;
+	
 	private Long id;
+	private Employee employee;
+	private EmployeeFacade employeeFacade;
 	private Map<String, Object> sessionMap;
 	
-	SearchCriteria criteria = new SearchCriteria();
-	
-	public DeleteExamAction() {
+	public EditEmployeeAction() {
 		try {
 			InitialContext ic = new InitialContext();
-			examFacade = (ExamFacade) ic.lookup("java:app/health-hub/ExamFacadeImpl");
+			employeeFacade = (EmployeeFacade) ic.lookup("java:app/health-hub/EmployeeFacadeImpl");
 		} catch (Exception e) {
-			throw new RuntimeException("Failed to look up ExamFacade", e);
+			throw new RuntimeException("Failed to look up employeeFacade", e);
 		}
 	}
 
@@ -38,19 +37,19 @@ public class DeleteExamAction extends ActionSupport implements SessionAware {
 		this.id = id;
 	}
 
-	public SearchCriteria getCriteria() {
-		return criteria;
+	public Employee getEmployee() {
+		return employee;
 	}
 
-	public void setCriteria(SearchCriteria criteria) {
-		this.criteria = criteria;
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	@Override
 	public void withSession(Map<String, Object> session) {
-		this.sessionMap = session;
+		sessionMap = session;
 	}
-
+	
 	public String execute() {
 		try {
 			Boolean isLoggedIn = sessionMap.get("LOGGED_IN_USER") != null;
@@ -60,7 +59,13 @@ public class DeleteExamAction extends ActionSupport implements SessionAware {
 					return ERROR;
 				}
 				
-				examFacade.delete(id);
+				employee = employeeFacade.findById(id);
+				
+				if(employee == null) {
+					addActionError("Employee not found.");
+					return ERROR;
+				}
+				
 				return SUCCESS;
 			} else {
 				return "login";
@@ -70,4 +75,5 @@ public class DeleteExamAction extends ActionSupport implements SessionAware {
 			return ERROR;
 		}
 	}
+
 }
