@@ -200,5 +200,17 @@ public class ExamTakenDAOImpl implements ExamTakenDAO {
 	        return false;
 	    }
 	}
+
+	@Override
+	public void deleteExamsTakenByEmployeeId(Long employeeId) {
+		String sql = "DELETE FROM exame_realizado WHERE cd_funcionario = ?";
+		try (Connection connection = DataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql)) {
+			statement.setLong(1, employeeId);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

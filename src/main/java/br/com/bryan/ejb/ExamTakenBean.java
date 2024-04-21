@@ -34,4 +34,8 @@ public class ExamTakenBean {
 	public List<ExamTaken> findAll(SearchCriteria criteria) {
 		return examTakenDAOImpl.findAll(criteria);
 	}
+	
+	public void deleteExamsTakenByEmployeeId(Long employeeId) {
+		examTakenDAOImpl.deleteExamsTakenByEmployeeId(employeeId);
+	}
 }

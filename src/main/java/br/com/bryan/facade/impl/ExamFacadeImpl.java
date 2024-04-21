@@ -16,7 +16,7 @@ import br.com.bryan.model.criteria.SearchCriteria;
 public class ExamFacadeImpl implements ExamFacade {
 
 	@EJB
-	ExamBean examBean;
+	private ExamBean examBean;
 
 	@Override
 	public Exam findById(Long id) {

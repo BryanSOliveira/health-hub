@@ -15,4 +15,6 @@ public interface ExamTakenDAO {
 	void delete(Long id);
 
 	List<ExamTaken> findAll(SearchCriteria criteria);
+	
+	void deleteExamsTakenByEmployeeId(Long employeeId); 
 }
