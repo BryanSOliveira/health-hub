@@ -19,4 +19,6 @@ public interface ExamTakenDAO {
 	void deleteExamsTakenByEmployeeId(Long employeeId);
 	
 	boolean isExamTaken(Long examId);
+	
+	boolean isDuplicateExamTaken(ExamTaken examTaken);
 }

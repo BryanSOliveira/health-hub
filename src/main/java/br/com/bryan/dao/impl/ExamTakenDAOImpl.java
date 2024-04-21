@@ -229,5 +229,24 @@ public class ExamTakenDAOImpl implements ExamTakenDAO {
 	    }
 		return false;
 	}
+
+	@Override
+	public boolean isDuplicateExamTaken(ExamTaken examTaken) {
+		String sql = "SELECT COUNT(*) FROM exame_realizado WHERE cd_exame = ? AND cd_funcionario = ? AND dt_realizacao = ?";
+		try (Connection connection = DataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, examTaken.getExam().getId());
+            statement.setLong(2, examTaken.getEmployee().getId());
+            statement.setDate(3, Date.valueOf(examTaken.getDate()));
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        }
+        return false;
+	}
 	
 }

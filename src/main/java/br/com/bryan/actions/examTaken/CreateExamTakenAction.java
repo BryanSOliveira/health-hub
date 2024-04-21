@@ -63,6 +63,7 @@ public class CreateExamTakenAction extends ActionSupport implements SessionAware
 				return "login";
 			}
 		} catch (Exception e) {
+			loadFormData();
 			addActionError("An error occurred: " + e.getMessage());
 			return ERROR;
 		}

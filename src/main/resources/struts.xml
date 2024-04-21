@@ -164,6 +164,7 @@
 		    </result>
 		    <result name="login">/WEB-INF/jsp/index.jsp</result>
 		    <result name="input">/WEB-INF/jsp/examTaken/newExamTaken.jsp</result>
+		    <result name="error">/WEB-INF/jsp/examTaken/newExamTaken.jsp</result>
 		</action>
 		<action name="deleteExamTaken" class="br.com.bryan.actions.examTaken.DeleteExamTakenAction">
 			<result name="success" type="redirectAction">

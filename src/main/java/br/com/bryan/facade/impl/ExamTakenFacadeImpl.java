@@ -26,6 +26,9 @@ public class ExamTakenFacadeImpl implements ExamTakenFacade {
 	@Override
 	public ExamTaken save(ExamTaken examTaken) throws ValidationException {
 		validateExamTaken(examTaken);
+		if(examTakenBean.isDuplicateExamTaken(examTaken)) {
+			throw new ValidationException("Duplicate exam entry for the same employee on the same date is not allowed.");
+		}
 		return examTakenBean.save(examTaken);
 	}
 

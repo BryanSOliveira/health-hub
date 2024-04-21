@@ -42,4 +42,8 @@ public class ExamTakenBean {
 	public boolean isExamTaken(Long examId) {
 		return examTakenDAOImpl.isExamTaken(examId);
 	}
+	
+	public boolean isDuplicateExamTaken(ExamTaken examTaken) {
+		return examTakenDAOImpl.isDuplicateExamTaken(examTaken);
+	}
 }
