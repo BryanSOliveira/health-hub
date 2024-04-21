@@ -212,5 +212,22 @@ public class ExamTakenDAOImpl implements ExamTakenDAO {
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public boolean isExamTaken(Long examId) {
+		String sql = "SELECT COUNT(*) FROM exame_realizado WHERE cd_exame = ?";
+		try (Connection connection = DataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql)) {
+	        statement.setLong(1, examId);
+	        try (ResultSet resultSet = statement.executeQuery()) {
+	            if (resultSet.next()) {
+	                return resultSet.getInt(1) > 0;
+	            }
+	        }
+	    } catch (SQLException e) {
+	    	e.printStackTrace();
+	    }
+		return false;
+	}
 	
 }

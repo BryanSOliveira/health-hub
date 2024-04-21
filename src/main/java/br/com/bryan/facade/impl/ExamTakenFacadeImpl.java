@@ -25,27 +25,13 @@ public class ExamTakenFacadeImpl implements ExamTakenFacade {
 
 	@Override
 	public ExamTaken save(ExamTaken examTaken) throws ValidationException {
-		if (examTaken.getEmployee() == null || examTaken.getEmployee().getId() == null) {
-			throw new ValidationException("Invalid employee id.");
-	    } else if (examTaken.getExam() == null || examTaken.getExam().getId() == null) {
-			throw new ValidationException("Invalid exam id.");
-	    } else if (examTaken.getDate() == null) {
-	        throw new ValidationException("Invalid date.");
-	    }
-		
+		validateExamTaken(examTaken);
 		return examTakenBean.save(examTaken);
 	}
 
 	@Override
 	public void update(ExamTaken examTaken) throws ValidationException {
-		if (examTaken.getEmployee() == null || examTaken.getEmployee().getId() == null) {
-			throw new ValidationException("Invalid employee id.");
-	    } else if (examTaken.getExam() == null || examTaken.getExam().getId() == null) {
-			throw new ValidationException("Invalid exam id.");
-	    } else if (examTaken.getDate() == null) {
-	        throw new ValidationException("Invalid date.");
-	    }
-		
+		validateExamTaken(examTaken);
 		examTakenBean.update(examTaken);
 	}
 
@@ -57,6 +43,16 @@ public class ExamTakenFacadeImpl implements ExamTakenFacade {
 	@Override
 	public List<ExamTaken> findAll(SearchCriteria criteria) {
 		return examTakenBean.findAll(criteria);
+	}
+	
+	private void validateExamTaken(ExamTaken examTaken) throws ValidationException {
+		if (examTaken.getEmployee() == null || examTaken.getEmployee().getId() == null) {
+			throw new ValidationException("Invalid employee id.");
+	    } else if (examTaken.getExam() == null || examTaken.getExam().getId() == null) {
+			throw new ValidationException("Invalid exam id.");
+	    } else if (examTaken.getDate() == null) {
+	        throw new ValidationException("Invalid date.");
+	    }
 	}
 
 }

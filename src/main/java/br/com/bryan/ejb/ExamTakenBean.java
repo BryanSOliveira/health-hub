@@ -38,4 +38,8 @@ public class ExamTakenBean {
 	public void deleteExamsTakenByEmployeeId(Long employeeId) {
 		examTakenDAOImpl.deleteExamsTakenByEmployeeId(employeeId);
 	}
+	
+	public boolean isExamTaken(Long examId) {
+		return examTakenDAOImpl.isExamTaken(examId);
+	}
 }

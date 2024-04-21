@@ -72,6 +72,7 @@
 		    <result name="input" type="dispatcher">/WEB-INF/jsp/exam/editExam.jsp</result>
 		</action>
 		<action name="deleteExam" class="br.com.bryan.actions.exam.DeleteExamAction">
+			<interceptor-ref name="appDefaultStack"/>
 			<result name="success" type="redirectAction">
 				<param name="actionName">exams</param>
 		        <param name="criteria.currentPage">${criteria.currentPage}</param>
@@ -80,6 +81,10 @@
 		        <param name="criteria.searchQuery">${criteria.searchQuery}</param>
 		    </result>
 		    <result name="login">/WEB-INF/jsp/index.jsp</result>
+		    <result name="error" type="redirectAction">
+		    	<param name="actionName">editExam</param>
+		    	<param name="id">${id}</param>
+		    </result>
 		</action>
 		
 		<!-- Employee -->

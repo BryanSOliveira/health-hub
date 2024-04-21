@@ -15,5 +15,5 @@ public interface ExamFacade {
 	List<Exam> findAll(SearchCriteria criteria);
     Exam save(Exam exam) throws ValidationException;
     void update(Exam exam) throws ValidationException;
-    void delete(Long id);
+    void delete(Long id) throws ValidationException;
 }
