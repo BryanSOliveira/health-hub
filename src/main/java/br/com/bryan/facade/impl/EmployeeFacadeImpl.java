@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 
 import com.opensymphony.xwork2.validator.ValidationException;
 
@@ -44,7 +42,6 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void delete(Long id) {
 		examTakenBean.deleteExamsTakenByEmployeeId(id);
 		employeeBean.delete(id);

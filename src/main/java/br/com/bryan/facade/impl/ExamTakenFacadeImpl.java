@@ -1,5 +1,6 @@
 package br.com.bryan.facade.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -56,6 +57,11 @@ public class ExamTakenFacadeImpl implements ExamTakenFacade {
 	    } else if (examTaken.getDate() == null) {
 	        throw new ValidationException("Invalid date.");
 	    }
+	}
+
+	@Override
+	public List<ExamTaken> findByDateRange(LocalDate startDate, LocalDate endDate) {
+		return examTakenBean.findByDateRange(startDate, endDate);
 	}
 
 }

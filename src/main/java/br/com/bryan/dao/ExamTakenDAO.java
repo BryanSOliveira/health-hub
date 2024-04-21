@@ -1,5 +1,6 @@
 package br.com.bryan.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import br.com.bryan.model.ExamTaken;
@@ -21,4 +22,6 @@ public interface ExamTakenDAO {
 	boolean isExamTaken(Long examId);
 	
 	boolean isDuplicateExamTaken(ExamTaken examTaken);
+	
+	List<ExamTaken> findByDateRange(LocalDate startDate, LocalDate endDate);
 }

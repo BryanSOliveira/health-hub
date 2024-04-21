@@ -1,5 +1,6 @@
 package br.com.bryan.facade;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -20,4 +21,6 @@ public interface ExamTakenFacade {
     void delete(Long id);
     
     List<ExamTaken> findAll(SearchCriteria criteria);
+    
+    List<ExamTaken> findByDateRange(LocalDate startDate, LocalDate endDate);
 }

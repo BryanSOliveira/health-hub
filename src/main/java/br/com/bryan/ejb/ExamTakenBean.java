@@ -1,5 +1,6 @@
 package br.com.bryan.ejb;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -45,5 +46,9 @@ public class ExamTakenBean {
 	
 	public boolean isDuplicateExamTaken(ExamTaken examTaken) {
 		return examTakenDAOImpl.isDuplicateExamTaken(examTaken);
+	}
+	
+	public List<ExamTaken> findByDateRange(LocalDate startDate, LocalDate endDate) {
+		return examTakenDAOImpl.findByDateRange(startDate, endDate);
 	}
 }

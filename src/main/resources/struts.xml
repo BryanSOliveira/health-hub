@@ -175,5 +175,19 @@
 		    </result>
 		    <result name="login">/WEB-INF/jsp/index.jsp</result>
 		</action>
+		<action name="reportExamsTaken">
+	        <result>/WEB-INF/jsp/examTaken/reportExamsTaken.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
+	    </action>
+	    <action name="generateReportExamsTaken" class="br.com.bryan.actions.examTaken.GenerateReportExamsTaken">
+	    	<result name="success" type="stream">
+		        <param name="contentType">application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</param>
+		        <param name="inputName">fileInputStream</param>
+		        <param name="contentDisposition">attachment; filename="exams-taken.xlsx"</param>
+		        <param name="bufferSize">1024</param>
+		    </result>
+	        <result name="input">/WEB-INF/jsp/examTaken/reportExamsTaken.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
+	    </action>
 	</package>
 </struts>

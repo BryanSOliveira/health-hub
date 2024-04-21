@@ -79,6 +79,11 @@
 								<i class="bi bi-plus-lg"></i> ADD
 							</a>
 						</div>
+						<div class="ms-auto">
+							<a href="reportExamsTaken" class="btn btn-secondary">
+								<i class="bi bi-table"> Report</i>
+							</a>
+						</div>
 					</div>
 					
 					<!-- Total Records -->

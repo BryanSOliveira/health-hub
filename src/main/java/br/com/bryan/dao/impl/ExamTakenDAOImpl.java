@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -247,6 +248,30 @@ public class ExamTakenDAOImpl implements ExamTakenDAO {
         	e.printStackTrace();
         }
         return false;
+	}
+
+	@Override
+	public List<ExamTaken> findByDateRange(LocalDate startDate, LocalDate endDate) {
+		List<ExamTaken> examsTaken = new ArrayList<>();
+        String sql = "SELECT er.cd_exame_realizado, er.cd_funcionario, er.cd_exame, er.dt_realizacao, e.nm_exame, f.nm_funcionario "
+				+ "FROM exame_realizado er "
+				+ "JOIN exame e ON er.cd_exame = e.cd_exame "
+				+ "JOIN funcionario f ON er.cd_funcionario = f.cd_funcionario "
+				+ "WHERE er.dt_realizacao BETWEEN ? AND ? ORDER BY er.dt_realizacao";
+        try (Connection connection = DataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql)) {
+        	statement.setDate(1, Date.valueOf(startDate));
+        	statement.setDate(2, Date.valueOf(endDate));
+            try (ResultSet resultSet = statement.executeQuery()) {
+	            while (resultSet.next()) {
+	            	ExamTaken examTaken = mapResultSetToExamTaken(resultSet);
+	            	examsTaken.add(examTaken);
+	            }
+	        }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return examsTaken;
 	}
 	
 }
