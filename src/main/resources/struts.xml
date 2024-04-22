@@ -189,5 +189,62 @@
 	        <result name="input">/WEB-INF/jsp/examTaken/reportExamsTaken.jsp</result>
 	        <result name="login">/WEB-INF/jsp/index.jsp</result>
 	    </action>
+	    
+	    <!-- User -->
+	    <action name="users" class="br.com.bryan.actions.user.ListUsersAction">
+	    	<interceptor-ref name="appDefaultStack"/>
+	        <result>/WEB-INF/jsp/user/listUsers.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
+	    </action>
+	    <action name="editUser" class="br.com.bryan.actions.user.EditUserAction">
+	    	<interceptor-ref name="appDefaultStack"/>
+	    	<result name="input">/WEB-INF/jsp/user/editUser.jsp</result>
+	        <result name="success">/WEB-INF/jsp/user/editUser.jsp</result>
+	        <result name="error">/WEB-INF/jsp/user/editUser.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
+	    </action>
+	    <action name="updateUser" class="br.com.bryan.actions.user.UpdateUserAction">
+			<interceptor-ref name="appDefaultStack"/>
+			<result name="success" type="redirectAction">
+				<param name="actionName">editUser</param>
+		        <param name="id">${user.id}</param>
+			</result>
+			<result name="error" type="dispatcher">/WEB-INF/jsp/user/editUser.jsp</result>
+		    <result name="login">/WEB-INF/jsp/index.jsp</result>
+		    <result name="input" type="dispatcher">/WEB-INF/jsp/user/editUser.jsp</result>
+		</action>
+		<action name="newUser">
+	        <result>/WEB-INF/jsp/user/newUser.jsp</result>
+	        <result name="login">/WEB-INF/jsp/index.jsp</result>
+	    </action>
+	    <action name="createUser" class="br.com.bryan.actions.user.CreateUserAction">
+		    <result name="success" type="redirectAction">
+		        <param name="actionName">editUser</param>
+		        <param name="id">${user.id}</param>
+		    </result>
+		    <result name="login">/WEB-INF/jsp/index.jsp</result>
+		    <result name="input">/WEB-INF/jsp/user/newUser.jsp</result>
+		</action>
+		<action name="deleteUser" class="br.com.bryan.actions.user.DeleteUserAction">
+			<interceptor-ref name="appDefaultStack"/>
+			<result name="success" type="redirectAction">
+				<param name="actionName">users</param>
+		        <param name="criteria.currentPage">${criteria.currentPage}</param>
+		        <param name="criteria.pageSize">${criteria.pageSize}</param>
+		        <param name="criteria.searchQuery">${criteria.searchQuery}</param>
+		    </result>
+		    <result name="login">/WEB-INF/jsp/index.jsp</result>
+		    <result name="error" type="redirectAction">users</result>
+		</action>
+		<action name="changePassword" class="br.com.bryan.actions.user.ChangePasswordAction">
+			<interceptor-ref name="appDefaultStack"/>
+			<result name="success" type="redirectAction">
+				<param name="actionName">editUser</param>
+		        <param name="id">${userId}</param>
+			</result>
+			<result name="error" type="dispatcher">/WEB-INF/jsp/user/editUser.jsp</result>
+		    <result name="login">/WEB-INF/jsp/index.jsp</result>
+		    <result name="input" type="dispatcher">/WEB-INF/jsp/user/editUser.jsp</result>
+		</action>
 	</package>
 </struts>

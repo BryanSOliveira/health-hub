@@ -32,6 +32,12 @@
 	          	Exams Taken
 	          </a>
 	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="users">
+	          	<i class="bi bi-person-lock"></i>
+	          	Users
+	          </a>
+	        </li>
         </s:if>
       </ul>
       <s:if test="#session.LOGGED_IN_USER != null">
@@ -69,14 +75,17 @@
 				</div>
 			</s:if>
 	  </div>
-	  <div class="row">
+	  <div class="row d-flex align-items-center">
+	  	<!-- Logo -->
+		  <div class="col-sm-6 text-center mt-4">
+				<img src="resources/images/logo.png" class="img-thumbnail" alt="Logo" style="width: 300px;">
+		  </div>
 	   	<!-- Login -->
-			<div class="col-sm-6 h-100">
-		  	<div class="card mt-2">
+			<div class="col-sm-6 mt-4">
+		  	<div class="card">
 			    <div class="card-body">
 			      <h5 class="card-title">
-			      	<i class="bi bi-box-arrow-in-right"></i>
-			      	Login
+			      	Authentication Required
 			      </h5>
 			      <s:form action="loginAction">
 						  <div class="mb-3">
@@ -96,39 +105,10 @@
 						    </label>
 						    <s:password cssClass="form-control" id="loginInputPassword" name="loginInfo.password" maxlength="50" minlength="8"/>
 						  </div>
-						  <s:submit cssClass="btn btn-primary" value="Login"/>
-						</s:form>
-			    </div>
-			  </div>
-		  </div>
-		  <!-- Register -->
-		  <div class="col-sm-6">
-		  	<div class="card mt-2">
-			    <div class="card-body">
-			      <h5 class="card-title">
-			      	<i class="bi bi-plus-lg"></i>
-			      	Create an account
-			      </h5>
-			      <s:form action="register">
-						  <div class="mb-3">
-						  	<s:fielderror fieldName="registerInfo.username"/>
-						    <label for="registerInputUserName" class="form-label">
-						    	<i class="bi bi-person"></i>
-						    	Username
-						   	</label>
-						   	<s:textfield cssClass="form-control" id="registerInputUserName" name="registerInfo.username" maxlength="50" minlength="5" aria-describedby="registerUserNameHelp" />
-						    <div id="registerUserNameHelp" class="form-text">We'll never share your email with anyone else.</div>
-						  </div>
-						  <div class="mb-3">
-						  	<s:fielderror fieldName="registerInfo.password"/>
-						    <label for="registerInputPassword" class="form-label">
-						    	<i class="bi bi-key"></i>
-						    	Password
-						    </label>
-						    <s:password cssClass="form-control" id="registerInputPassword" name="registerInfo.password" maxlength="50" minlength="8"/>
-						  </div>
-						  <s:submit cssClass="btn btn-success" value="Register">
-						  </s:submit>
+						  <button type="submit" class="btn btn-primary">
+						  	<i class="bi bi-box-arrow-in-right"></i>
+						  	Login
+						  </button>
 						</s:form>
 			    </div>
 			  </div>

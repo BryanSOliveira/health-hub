@@ -54,6 +54,9 @@ public class LoginAction extends ActionSupport implements SessionAware {
     	try {
 	        if (userFacade.authenticate(loginInfo.getUsername(), loginInfo.getPassword())) {
 	        	sessionMap.put("LOGGED_IN_USER", loginInfo.getUsername());
+	        	
+	        	User user = userFacade.findByUsername(loginInfo.getUsername());
+	        	sessionMap.put("LOGGED_IN_USER_ID", user.getId());
 	            return SUCCESS;
 	        } else {
 	            addActionError("Invalid username or password.");

@@ -3,8 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Health Hub | Exams Taken</title>
+<title>Health Hub | Users</title>
 <!-- Bootstrap -->
 <%@ include file="/WEB-INF/includes/bootstrap.jspf"%>
 </head>
@@ -15,14 +16,14 @@
 			<div class="card">
 				<div class="card-header" style="background-color: #26e2f8;">
 					<h2 class="card-title">
-						<i class="bi bi-clipboard-check"></i>
-						Exams Taken
+						<i class="bi bi-person-lock"></i>
+						Users
 					</h2>
 				</div>
 				<div class="card-body">
 					<!-- Toolbar -->
 					<div class="btn-toolbar" role="toolbar">
-						<s:form action="examsTaken">
+						<s:form action="users">
 							<s:hidden name="criteria.searchQuery" value="%{criteria.searchQuery}" />
 							
 							<div class="input-group mb-3 me-2">
@@ -42,7 +43,7 @@
 						<!-- Pagination -->
 						<nav class="me-2">
 						  <ul class="pagination">
-						  	<s:form action="examsTaken" cssClass="page-item">
+						  	<s:form action="users" cssClass="page-item">
 									<s:hidden name="criteria.currentPage" value="%{criteria.currentPage - 1}"/>
 							    <s:hidden name="criteria.pageSize" value="%{criteria.pageSize}"/>
 							    <s:hidden name="criteria.searchQuery" value="%{criteria.searchQuery}"/>
@@ -53,11 +54,11 @@
 								<li class="page-item">
 								    <span class="page-link active"><s:property value="criteria.currentPage"/></span>
 								</li>
-								<s:form action="examsTaken" cssClass="page-item">
+								<s:form action="users" cssClass="page-item">
 								    <s:hidden name="criteria.currentPage" value="%{criteria.currentPage + 1}"/>
 								    <s:hidden name="criteria.pageSize" value="%{criteria.pageSize}"/>
 								    <s:hidden name="criteria.searchQuery" value="%{criteria.searchQuery}"/>
-								    <button type="submit" class="page-link" <s:if test="examsTaken.size() < criteria.pageSize">disabled</s:if>>
+								    <button type="submit" class="page-link" <s:if test="users.size() < criteria.pageSize">disabled</s:if>>
 								    	<span aria-hidden="true">&raquo;</span>
 								    </button>
 								</s:form>
@@ -65,29 +66,24 @@
 						</nav>
 						
 						<!-- Search -->
-						<s:form action="examsTaken">
+						<s:form action="users">
 							<s:hidden name="criteria.pageSize" value="%{criteria.pageSize}" />
 							<div class="input-group mb-3">
-							 	<s:textfield cssClass="form-control" name="criteria.searchQuery" placeholder="Search Employee or Exam"/>
+							 	<s:textfield cssClass="form-control" name="criteria.searchQuery" placeholder="Search by ID or Name"/>
 							  <button type="submit" class="btn btn-secondary">
 							  	<i class="bi bi-search"></i>
 							  </button>
 							</div>
 						</s:form>
 						<div class="ms-2">
-							<a href="newExamTaken" class="btn btn-primary">
+							<a href="newUser" class="btn btn-primary">
 								<i class="bi bi-plus-lg"></i> ADD
-							</a>
-						</div>
-						<div class="ms-auto">
-							<a href="reportExamsTaken" class="btn btn-secondary">
-								<i class="bi bi-table"> Report</i>
 							</a>
 						</div>
 					</div>
 					
 					<!-- Total Records -->
-					<small><b><s:property value="examsTaken.size()" /> records</b></small>
+					<small><b><s:property value="users.size()" /> records</b></small>
 					
 					<!--  Table  -->
 					<div class="table-responsive">
@@ -95,43 +91,29 @@
 						  <thead class="table-light">
 						    <tr>
 						      <th style="width: 10%;">ID</th>
-						      <th>Employee</th>
-						      <th>Exam</th>
-						      <th>Date</th>
+						      <th>Name</th>
+						      <th>Inactive Time (in min)</th>
 						      <th style="width: 5%;"></th>
 						    </tr>
 						  </thead>
 						  <tbody>
-						  	<s:iterator value="examsTaken">
+						  	<s:iterator value="users">
 							    <tr>
 							      <th>
-							      	<a href="<s:url action='editExamTaken'><s:param name='id' value='%{id}'/></s:url>">
+							      	<a href="<s:url action='editUser'><s:param name='id' value='%{id}'/></s:url>">
 							      		<s:property value="id" />
 							      	</a>
 							      </th>
+							      <td><s:property value="username" /></td>
+							      <td><s:property value="inactiveTime" /></td>
 							      <td>
-							      	<a href="<s:url action='editEmployee'><s:param name='id' value='%{employee.id}'/></s:url>">
-							      		<s:property value="employee.name" />
-							      		(<s:property value="employee.id" />)
-							      	</a>
-							      </td>
-							      <td>
-							      	<a href="<s:url action='editExam'><s:param name='id' value='%{exam.id}'/></s:url>">
-							      		<s:property value="exam.name" />
-							      		(<s:property value="exam.id" />)
-							      	</a>
-							      </td>
-							      <td>
-							      	<s:date name="date" format="dd/MM/yyyy" />
-							      </td>
-							      <td>
-							      	<s:form action="deleteExamTaken" class="d-inline">
+							      	<s:form action="deleteUser" class="d-inline">
 												<s:hidden name="id" value="%{id}"/>
 												<s:hidden name="criteria.currentPage" value="%{criteria.currentPage}"/>
 										    <s:hidden name="criteria.pageSize" value="%{criteria.pageSize}"/>
 										    <s:hidden name="criteria.searchQuery" value="%{criteria.searchQuery}"/>
 									    	<button type="submit" class="btn btn-danger float-none float-sm-end" 
-									    			onclick="return confirm('Are you sure you want to delete this exam taken?');">
+									    			onclick="return confirm('Are you sure you want to delete this user?');">
 									    		<i class="bi bi-trash3"></i>
 									    	</button>
 								    	</s:form>
@@ -143,7 +125,7 @@
 					</div>
 					
 					<!-- Total Records -->
-					<small><b><s:property value="examsTaken.size()" /> records</b></small>
+					<small><b><s:property value="users.size()" /> records</b></small>
 					
 				</div>
 			</div>

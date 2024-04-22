@@ -37,6 +37,11 @@
 				</div>
 				<s:if test="examTaken != null && examTaken.id != null">
 					<div class="card-body">
+						<s:if test="hasFieldErrors()">
+							<div class="alert alert-danger" role="alert">
+							  <s:fielderror />
+							</div>
+						</s:if>
 						<s:form action="updateExamTaken">
 							<s:hidden name="examTaken.id" value="%{examTaken.id}" />
 							<div class="row g-3">
