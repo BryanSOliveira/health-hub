@@ -25,7 +25,7 @@ public interface UserFacade {
     
     List<User> findAll(SearchCriteria criteria);
 	
-	boolean authenticate(String username, String password) throws NoSuchAlgorithmException;
+    User authenticate(String username, String password) throws NoSuchAlgorithmException;
 	
 	boolean isUsernameAvailable(Long id, String username);
 	

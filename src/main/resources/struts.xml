@@ -11,24 +11,27 @@
 	<package name="health-hub" extends="struts-default">
 		<interceptors>
 	        <interceptor name="store" class="org.apache.struts2.interceptor.MessageStoreInterceptor"/>
-		    <interceptor-stack name="appDefaultStack">
+	        <interceptor name="sessionTimeout" class="br.com.bryan.interceptors.SessionTimeoutInterceptor"/>
+		    <interceptor-stack name="appStack">
 		        <interceptor-ref name="defaultStack"/>
 		        <interceptor-ref name="store">
 		            <param name="operationMode">AUTOMATIC</param>
 		        </interceptor-ref>
+		        <interceptor-ref name="sessionTimeout"/>
 		    </interceptor-stack>
 	    </interceptors>
+	    
+	    <default-interceptor-ref name="appStack"/>
+	    
+	    <global-results>
+		    <result name="sessionTimeout">/WEB-INF/jsp/index.jsp</result>
+		</global-results>
 	    
         <action name="">
             <result>/WEB-INF/jsp/index.jsp</result>
         </action>
         
-        <action name="register" class="br.com.bryan.actions.RegisterAction">
-        	<result name="success">/WEB-INF/jsp/index.jsp</result>
-            <result name="input">/WEB-INF/jsp/index.jsp</result>
-            <result name="error">/WEB-INF/jsp/index.jsp</result>
-        </action>
-        <action name="loginAction" class="br.com.bryan.actions.LoginAction">
+        <action name="login" class="br.com.bryan.actions.LoginAction">
 	        <result name="success">/WEB-INF/jsp/index.jsp</result>
 	        <result name="input">/WEB-INF/jsp/index.jsp</result>
 	        <result name="error">/WEB-INF/jsp/index.jsp</result>
@@ -43,7 +46,6 @@
 	        <result name="login">/WEB-INF/jsp/index.jsp</result>
 	    </action>
 	    <action name="editExam" class="br.com.bryan.actions.exam.EditExamAction">
-	    	<interceptor-ref name="appDefaultStack"/>
 	    	<result name="input">/WEB-INF/jsp/exam/editExam.jsp</result>
 	        <result name="success">/WEB-INF/jsp/exam/editExam.jsp</result>
 	        <result name="error">/WEB-INF/jsp/exam/editExam.jsp</result>
@@ -62,7 +64,6 @@
 		    <result name="input">/WEB-INF/jsp/exam/newExam.jsp</result>
 		</action>
 		<action name="updateExam" class="br.com.bryan.actions.exam.UpdateExamAction">
-			<interceptor-ref name="appDefaultStack"/>
 			<result name="success" type="redirectAction">
 				<param name="actionName">editExam</param>
 		        <param name="id">${exam.id}</param>
@@ -72,7 +73,6 @@
 		    <result name="input" type="dispatcher">/WEB-INF/jsp/exam/editExam.jsp</result>
 		</action>
 		<action name="deleteExam" class="br.com.bryan.actions.exam.DeleteExamAction">
-			<interceptor-ref name="appDefaultStack"/>
 			<result name="success" type="redirectAction">
 				<param name="actionName">exams</param>
 		        <param name="criteria.currentPage">${criteria.currentPage}</param>
@@ -93,14 +93,12 @@
 	        <result name="login">/WEB-INF/jsp/index.jsp</result>
 	    </action>
 	    <action name="editEmployee" class="br.com.bryan.actions.employee.EditEmployeeAction">
-	    	<interceptor-ref name="appDefaultStack"/>
 	    	<result name="input">/WEB-INF/jsp/employee/editEmployee.jsp</result>
 	        <result name="success">/WEB-INF/jsp/employee/editEmployee.jsp</result>
 	        <result name="error">/WEB-INF/jsp/employee/editEmployee.jsp</result>
 	        <result name="login">/WEB-INF/jsp/index.jsp</result>
 	    </action>
 	    <action name="updateEmployee" class="br.com.bryan.actions.employee.UpdateEmployeeAction">
-			<interceptor-ref name="appDefaultStack"/>
 			<result name="success" type="redirectAction">
 				<param name="actionName">editEmployee</param>
 		        <param name="id">${employee.id}</param>
@@ -141,14 +139,12 @@
 	        <result name="login">/WEB-INF/jsp/index.jsp</result>
 	    </action>
 	    <action name="editExamTaken" class="br.com.bryan.actions.examTaken.EditExamTakenAction">
-	    	<interceptor-ref name="appDefaultStack"/>
 	    	<result name="input">/WEB-INF/jsp/examTaken/editExamTaken.jsp</result>
 	        <result name="success">/WEB-INF/jsp/examTaken/editExamTaken.jsp</result>
 	        <result name="error">/WEB-INF/jsp/examTaken/editExamTaken.jsp</result>
 	        <result name="login">/WEB-INF/jsp/index.jsp</result>
 	    </action>
 	    <action name="updateExamTaken" class="br.com.bryan.actions.examTaken.UpdateExamTakenAction">
-			<interceptor-ref name="appDefaultStack"/>
 			<result name="success" type="redirectAction">
 				<param name="actionName">editExamTaken</param>
 		        <param name="id">${examTaken.id}</param>
@@ -192,19 +188,16 @@
 	    
 	    <!-- User -->
 	    <action name="users" class="br.com.bryan.actions.user.ListUsersAction">
-	    	<interceptor-ref name="appDefaultStack"/>
 	        <result>/WEB-INF/jsp/user/listUsers.jsp</result>
 	        <result name="login">/WEB-INF/jsp/index.jsp</result>
 	    </action>
 	    <action name="editUser" class="br.com.bryan.actions.user.EditUserAction">
-	    	<interceptor-ref name="appDefaultStack"/>
 	    	<result name="input">/WEB-INF/jsp/user/editUser.jsp</result>
 	        <result name="success">/WEB-INF/jsp/user/editUser.jsp</result>
 	        <result name="error">/WEB-INF/jsp/user/editUser.jsp</result>
 	        <result name="login">/WEB-INF/jsp/index.jsp</result>
 	    </action>
 	    <action name="updateUser" class="br.com.bryan.actions.user.UpdateUserAction">
-			<interceptor-ref name="appDefaultStack"/>
 			<result name="success" type="redirectAction">
 				<param name="actionName">editUser</param>
 		        <param name="id">${user.id}</param>
@@ -226,7 +219,6 @@
 		    <result name="input">/WEB-INF/jsp/user/newUser.jsp</result>
 		</action>
 		<action name="deleteUser" class="br.com.bryan.actions.user.DeleteUserAction">
-			<interceptor-ref name="appDefaultStack"/>
 			<result name="success" type="redirectAction">
 				<param name="actionName">users</param>
 		        <param name="criteria.currentPage">${criteria.currentPage}</param>
@@ -237,7 +229,6 @@
 		    <result name="error" type="redirectAction">users</result>
 		</action>
 		<action name="changePassword" class="br.com.bryan.actions.user.ChangePasswordAction">
-			<interceptor-ref name="appDefaultStack"/>
 			<result name="success" type="redirectAction">
 				<param name="actionName">editUser</param>
 		        <param name="id">${userId}</param>

@@ -52,11 +52,12 @@ public class LoginAction extends ActionSupport implements SessionAware {
 
     public String execute() {
     	try {
-	        if (userFacade.authenticate(loginInfo.getUsername(), loginInfo.getPassword())) {
-	        	sessionMap.put("LOGGED_IN_USER", loginInfo.getUsername());
-	        	
-	        	User user = userFacade.findByUsername(loginInfo.getUsername());
+    		User user = userFacade.authenticate(loginInfo.getUsername(), loginInfo.getPassword());
+	        if (user != null) {
+	        	sessionMap.put("LOGGED_IN_USER", user.getUsername());
 	        	sessionMap.put("LOGGED_IN_USER_ID", user.getId());
+	        	sessionMap.put("LAST_INTERACTION_TIMESTAMP_MS", System.currentTimeMillis());
+	        	sessionMap.put("MAX_INACTIVE_INTERVAL_MS", user.getInactiveTime() * 60000);
 	            return SUCCESS;
 	        } else {
 	            addActionError("Invalid username or password.");

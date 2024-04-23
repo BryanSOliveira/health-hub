@@ -76,12 +76,12 @@ public class UserFacadeImpl implements UserFacade {
 	}
 
 	@Override
-	public boolean authenticate(String username, String password) throws NoSuchAlgorithmException {
+	public User authenticate(String username, String password) throws NoSuchAlgorithmException {
 		User user = userBean.findByUsername(username);
         if (user != null && user.getPassword().equals(encryptPassword(password))) {
-            return true;
+            return null;
         }
-        return false; 
+        return user; 
 	}
 	
 	@Override

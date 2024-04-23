@@ -87,7 +87,7 @@
 			      <h5 class="card-title">
 			      	Authentication Required
 			      </h5>
-			      <s:form action="loginAction">
+			      <s:form action="login">
 						  <div class="mb-3">
 						  	<s:fielderror fieldName="loginInfo.username"/>
 						    <label for="loginInputUserName" class="form-label">
