@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import com.opensymphony.xwork2.validator.ValidationException;
 
 import br.com.bryan.ejb.ExamTakenBean;
+import br.com.bryan.exceptions.EntityNotFoundException;
 import br.com.bryan.facade.ExamTakenFacade;
 import br.com.bryan.model.ExamTaken;
 import br.com.bryan.model.criteria.SearchCriteria;
@@ -20,8 +21,12 @@ public class ExamTakenFacadeImpl implements ExamTakenFacade {
 	private ExamTakenBean examTakenBean;
 
 	@Override
-	public ExamTaken findById(Long id) {
-		return examTakenBean.findById(id);
+	public ExamTaken findById(Long id) throws EntityNotFoundException {
+		ExamTaken examTaken = examTakenBean.findById(id);
+		if (examTaken == null) {
+            throw new EntityNotFoundException("Exam Taken not found with ID: " + id);
+        }
+		return examTaken;
 	}
 
 	@Override
@@ -34,13 +39,15 @@ public class ExamTakenFacadeImpl implements ExamTakenFacade {
 	}
 
 	@Override
-	public void update(ExamTaken examTaken) throws ValidationException {
+	public void update(ExamTaken examTaken) throws ValidationException, EntityNotFoundException {
+		findById(examTaken.getId());
 		validateExamTaken(examTaken);
 		examTakenBean.update(examTaken);
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(Long id) throws EntityNotFoundException {
+		findById(id);
 		examTakenBean.delete(id);
 	}
 

@@ -7,21 +7,22 @@ import javax.ejb.Local;
 
 import com.opensymphony.xwork2.validator.ValidationException;
 
+import br.com.bryan.exceptions.EntityNotFoundException;
 import br.com.bryan.exceptions.UserAlreadyExistsException;
 import br.com.bryan.model.User;
 import br.com.bryan.model.criteria.SearchCriteria;
 
 @Local
 public interface UserFacade {
-	User findById(Long id);
+	User findById(Long id) throws EntityNotFoundException;
 	
 	User findByUsername(String username);
 	
 	User save(User user) throws ValidationException, NoSuchAlgorithmException, UserAlreadyExistsException;
 	
-    void update(User user) throws ValidationException, UserAlreadyExistsException;
+    void update(User user) throws ValidationException, UserAlreadyExistsException, EntityNotFoundException;
     
-    void delete(Long id);
+    void delete(Long id) throws EntityNotFoundException;
     
     List<User> findAll(SearchCriteria criteria);
 	

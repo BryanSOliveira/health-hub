@@ -7,13 +7,14 @@ import javax.jws.WebService;
 
 import com.opensymphony.xwork2.validator.ValidationException;
 
+import br.com.bryan.exceptions.EntityNotFoundException;
 import br.com.bryan.model.Exam;
 import br.com.bryan.model.criteria.SearchCriteria;
 
 @WebService
 public interface ExamWebService {
 	@WebMethod
-	Exam getExam(Long id);
+	Exam getExam(Long id) throws EntityNotFoundException;
 	
 	@WebMethod
 	List<Exam> getAllExams(SearchCriteria criteria);
@@ -22,8 +23,8 @@ public interface ExamWebService {
     Exam createExam(Exam exam) throws ValidationException;
 	
 	@WebMethod
-    void updateExam(Exam exam) throws ValidationException;
+    void updateExam(Exam exam) throws ValidationException, EntityNotFoundException;
 	
 	@WebMethod
-    void deleteExam(Long id) throws ValidationException;
+    void deleteExam(Long id) throws ValidationException, EntityNotFoundException;
 }

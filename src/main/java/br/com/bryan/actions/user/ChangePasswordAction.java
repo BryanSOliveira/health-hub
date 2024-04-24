@@ -8,6 +8,7 @@ import org.apache.struts2.action.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import br.com.bryan.exceptions.EntityNotFoundException;
 import br.com.bryan.facade.UserFacade;
 import br.com.bryan.model.User;
 
@@ -62,7 +63,11 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	public void loadEditUser() {
-		user = userFacade.findById(userId);
+		try {
+			user = userFacade.findById(userId);
+		} catch (EntityNotFoundException e) {
+			addActionError("An error occurred: " + e.getMessage());
+		}
 	}
 	
 	public boolean isLoggedIn() {

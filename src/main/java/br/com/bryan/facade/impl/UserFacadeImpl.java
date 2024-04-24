@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import com.opensymphony.xwork2.validator.ValidationException;
 
 import br.com.bryan.ejb.UserBean;
+import br.com.bryan.exceptions.EntityNotFoundException;
 import br.com.bryan.exceptions.UserAlreadyExistsException;
 import br.com.bryan.facade.UserFacade;
 import br.com.bryan.model.User;
@@ -23,8 +24,12 @@ public class UserFacadeImpl implements UserFacade {
     private UserBean userBean;
 
 	@Override
-    public User findById(Long id) {
-        return userBean.findById(id);
+    public User findById(Long id) throws EntityNotFoundException {
+        User user = userBean.findById(id);
+        if (user == null) {
+            throw new EntityNotFoundException("User not found with ID: " + id);
+        }
+        return user;
     }
 	
 	@Override
@@ -49,7 +54,8 @@ public class UserFacadeImpl implements UserFacade {
 	}
 	
 	@Override
-	public void update(User user) throws ValidationException, UserAlreadyExistsException {
+	public void update(User user) throws ValidationException, UserAlreadyExistsException, EntityNotFoundException {
+		findById(user.getId());
 		validateUsername(user.getUsername());
 		validateInactiveTime(user.getInactiveTime());
 		
@@ -61,7 +67,8 @@ public class UserFacadeImpl implements UserFacade {
 	}
 	
 	@Override
-	public void delete(Long id) {
+	public void delete(Long id) throws EntityNotFoundException {
+		findById(id);
 		userBean.delete(id);
 	}
 	

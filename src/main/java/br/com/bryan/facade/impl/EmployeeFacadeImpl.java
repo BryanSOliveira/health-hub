@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.validator.ValidationException;
 
 import br.com.bryan.ejb.EmployeeBean;
 import br.com.bryan.ejb.ExamTakenBean;
+import br.com.bryan.exceptions.EntityNotFoundException;
 import br.com.bryan.facade.EmployeeFacade;
 import br.com.bryan.model.Employee;
 import br.com.bryan.model.criteria.SearchCriteria;
@@ -23,8 +24,12 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
 	private ExamTakenBean examTakenBean;
 
 	@Override
-	public Employee findById(Long id) {
-		return employeeBean.findById(id);
+	public Employee findById(Long id) throws EntityNotFoundException {
+		Employee employee = employeeBean.findById(id);
+		if (employee == null) {
+            throw new EntityNotFoundException("Employee not found with ID: " + id);
+        }
+		return employee;
 	}
 
 	@Override
@@ -35,14 +40,16 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
 	}
 
 	@Override
-	public void update(Employee employee) throws ValidationException {
+	public void update(Employee employee) throws ValidationException, EntityNotFoundException {
+		findById(employee.getId());
 		validateEmployee(employee);
 		
 		employeeBean.update(employee);
 	}
 
 	@Override
-	public void delete(Long id) {
+	public void delete(Long id) throws EntityNotFoundException {
+		findById(id);
 		examTakenBean.deleteExamsTakenByEmployeeId(id);
 		employeeBean.delete(id);
 	}
