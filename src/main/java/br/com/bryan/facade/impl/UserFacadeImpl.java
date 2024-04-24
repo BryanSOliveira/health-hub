@@ -86,9 +86,9 @@ public class UserFacadeImpl implements UserFacade {
 	public User authenticate(String username, String password) throws NoSuchAlgorithmException {
 		User user = userBean.findByUsername(username);
         if (user != null && user.getPassword().equals(encryptPassword(password))) {
-            return null;
+            return user;
         }
-        return user; 
+        return null; 
 	}
 	
 	@Override
@@ -127,8 +127,8 @@ public class UserFacadeImpl implements UserFacade {
             throw new ValidationException("Invalid inactive time.");
         }
 		
-		if (inactiveTime < 1 || inactiveTime > 60) {
-	        throw new ValidationException("Inactive time must be between 1 and 60 minutes.");
+		if (inactiveTime < 1 || inactiveTime > 90) {
+	        throw new ValidationException("Inactive time must be between 1 and 90 minutes.");
 	    }
 	}
 	

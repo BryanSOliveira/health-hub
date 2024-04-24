@@ -56,7 +56,7 @@
 							    						 id="userInactiveTime" 
 							    						 type="number" 
 							    						 min="1" 
-							    						 max="60" 
+							    						 max="90" 
 							    						 step="1"
 							    						 placeholder="in minutes"/>
 							  </div>

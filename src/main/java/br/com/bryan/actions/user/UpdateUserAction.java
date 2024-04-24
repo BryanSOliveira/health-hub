@@ -39,8 +39,8 @@ public class UpdateUserAction extends ActionSupport implements SessionAware {
 		
 		if (user.getInactiveTime() == null) {
 			addFieldError("user.inactiveTime", "Invalid inactive time.");
-        } else if (user.getInactiveTime() < 1 || user.getInactiveTime() > 60) {
-			addFieldError("user.inactiveTime", "Inactive time must be between 1 and 60 minutes.");
+        } else if (user.getInactiveTime() < 1 || user.getInactiveTime() > 90) {
+			addFieldError("user.inactiveTime", "Inactive time must be between 1 and 90 minutes.");
 	    }
 	}
 	

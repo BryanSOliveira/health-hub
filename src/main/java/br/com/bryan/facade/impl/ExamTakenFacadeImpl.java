@@ -42,6 +42,9 @@ public class ExamTakenFacadeImpl implements ExamTakenFacade {
 	public void update(ExamTaken examTaken) throws ValidationException, EntityNotFoundException {
 		findById(examTaken.getId());
 		validateExamTaken(examTaken);
+		if(examTakenBean.isDuplicateExamTaken(examTaken)) {
+			throw new ValidationException("Duplicate exam entry for the same employee on the same date is not allowed.");
+		}
 		examTakenBean.update(examTaken);
 	}
 

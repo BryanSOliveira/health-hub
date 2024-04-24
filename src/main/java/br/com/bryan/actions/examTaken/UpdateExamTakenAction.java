@@ -50,6 +50,7 @@ private static final long serialVersionUID = 1L;
 				return "login";
 			}
 		} catch (Exception e) {
+			loadFormData();
 			addActionError("An error occurred: " + e.getMessage());
 			return ERROR;
 		}

@@ -149,7 +149,7 @@
 				<param name="actionName">editExamTaken</param>
 		        <param name="id">${examTaken.id}</param>
 			</result>
-			<result name="error" type="redirectAction">examsTaken</result>
+			<result name="error" type="dispatcher">/WEB-INF/jsp/examTaken/editExamTaken.jsp</result>
 		    <result name="login">/WEB-INF/jsp/index.jsp</result>
 		    <result name="input" type="dispatcher">/WEB-INF/jsp/examTaken/editExamTaken.jsp</result>
 		</action>
